@@ -1,0 +1,761 @@
+// import Container from "react-bootstrap/Container";
+// import Nav from "react-bootstrap/Nav";
+// import Navbar from "react-bootstrap/Navbar";
+// import NavDropdown from "react-bootstrap/NavDropdown";
+// import { useState } from "react";
+// import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+// import "./Navbar.css"; // Ensure this path is correct
+// import React, { useEffect } from "react";
+// import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+// import { styled, alpha } from "@mui/material/styles";
+// import InputBase from "@mui/material/InputBase";
+
+// import {
+//   Divider,
+//   TextField,
+//   Modal,
+//   IconButton,
+//   Typography,
+//   Drawer,
+//   Box,
+//   // List,
+//   // ListItem,
+//   // ListItemText,
+//   Grid,
+// } from "@mui/material";
+// import SearchIcon from "@mui/icons-material/Search";
+// import PersonIcon from "@mui/icons-material/Person";
+// // import LanguageIcon from "@mui/icons-material/Language";
+// import { Button } from "react-bootstrap";
+// import CommonCard from "../Card/CommonCard";
+// import { Link } from "react-router-dom";
+
+// export default function CustomNavbar() {
+//   const [hoveredDropdown, setHoveredDropdown] = useState(null);
+//   const [isHovered, setIsHovered] = useState(false);
+//   const [cartItems, setCartItems] = useState([]);
+//   const [searchModalOpen, setSearchModalOpen] = useState(false);
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
+
+//   const handleScroll = () => {
+//     if (window.scrollY > 50) {
+//       setIsScrolled(true);
+//     } else {
+//       setIsScrolled(false);
+//     }
+//   };
+
+//   useEffect(() => {
+//     window.addEventListener("scroll", handleScroll);
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   // Function to handle the opening of the search modal
+//   // const handleSearchIconClick = () => {
+//   //   setSearchModalOpen(true);
+//   // };
+
+//   // Function to handle the closing of the search modal
+//   const handleCloseModal = () => {
+//     setSearchModalOpen(false);
+//   };
+//   const [openCartModal, setOpenCartModal] = useState(false);
+//   const handleOpenCartModal = () => {
+//     setOpenCartModal(true);
+//   };
+
+//   const handleCloseCartModal = () => {
+//     setOpenCartModal(false);
+//   };
+//   const handleAddToCart = (product, quantity) => {
+//     const newItem = { ...product, quantity }; // Create a new item with quantity
+//     setCartItems((prevItems) => [...prevItems, newItem]); // Update cart items
+//     setOpenCartModal(true); // Open the cart drawer
+//   };
+//   const onAddToCart = (item) => {
+//     setCartItems((prevItems) => [...prevItems, item]);
+//   };
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth <= 600);
+//     };
+
+//     window.addEventListener("resize", handleResize);
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//     };
+//   }, []);
+//  // Styled components for Search Field
+// const Search = styled(Box)({
+//   display: 'flex',
+//   alignItems: 'center',
+//   backgroundColor: "#173334",
+//   borderRadius: "4px",
+//   padding: '0 8px',
+//   width: "250px", // Adjust the width as needed
+// });
+
+// const SearchIconWrapper = styled(IconButton)({
+//   color: "#febd2f",
+// });
+
+// const StyledInputBase = styled(InputBase)({
+//   color: "#febd2f",
+//   width: "100%",
+//   '& .MuiInputBase-input': {
+//     color: '#febd2f',
+//   },
+//   '& .MuiOutlinedInput-root': {
+//     '& fieldset': {
+//       borderColor: "#febd2f", // Border color for the input field
+//     },
+//   },
+// });
+
+//   return (
+//     <div>
+//       {[false, "sm", "md", "lg", "xl"].map((expand) => (
+//         <Navbar
+//           expand="lg"
+//           fixed="top"
+//           className={`bg-body-tertiary ${isScrolled ? "navbar-scrolled" : ""}`}
+//           style={{
+//             paddingBottom: "2rem",
+
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "center",
+//             backgroundColor: "#173334",
+//           }}
+//         >
+//           <Container
+//             style={{
+//               display: "flex",
+//               alignItems: "center",
+//               justifyContent: "inherit",
+//             }}
+//           >
+//             {/* Logo */}
+//             <Navbar.Brand href="/" style={{ color: "#febd2f", pr: "3rem" }}>
+//               TheAgriGoods
+//             </Navbar.Brand>
+//             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+//             <Navbar.Collapse id="basic-navbar-nav">
+//               <Nav
+//                 className="me-auto"
+//                 style={{
+//                   display: "flex",
+//                   alignItems: "center",
+//                   borderRadius: "0px",
+//                 }}
+//               >
+//                 {/* All Products Dropdown */}
+//                 {!isMobile ? (
+//                   <NavDropdown
+//                     title={
+//                       <div
+//                         style={{
+//                           display: "flex",
+//                           alignItems: "center",
+//                           color: "#febd2f",
+//                         }}
+//                       >
+//                         All Products
+//                         <KeyboardArrowDownIcon
+//                           sx={{
+//                             color: "#febd2f",
+//                             fontSize: "1rem",
+//                             transition: "transform 0.6s ease",
+//                             transform:
+//                               hoveredDropdown === 0
+//                                 ? "rotate(180deg)"
+//                                 : "rotate(0deg)",
+//                           }}
+//                         />
+//                       </div>
+//                     }
+//                     id="all-products-dropdown"
+//                     className="nav-dropdown"
+//                     onMouseEnter={() => setHoveredDropdown(0)}
+//                     onMouseLeave={() => setHoveredDropdown(null)}
+//                     show={hoveredDropdown === 0}
+//                   >
+//                     <div className="dropdown-content">
+//                       <div className="dropdown-column">
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/basmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Basmati Rice
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Non-Basmati Rice
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/riceother"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Rice Other
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           style={{ fontWeight: "500" }}
+//                           to="/basmati"
+//                         >
+//                           Grains
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           style={{ fontWeight: "500" }}
+//                           to="/basmati"
+//                         >
+//                           Flour
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Spices-Whole
+//                         </NavDropdown.Item>
+//                         {/* <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           PR 11 Golden Sella
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           PR 11 Crime Sella
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           Sharbati
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           Sugandha
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           Pusa
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link}  style={{ fontWeight: "bold" }}to="/basmati">
+//                           509 Basmati Rice
+//                         </NavDropdown.Item> */}
+//                       </div>
+//                       <div className="dropdown-column">
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Powdered Spices
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Oil Seed
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Pulses
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Powdered Spices
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Vegetables
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item
+//                           as={Link}
+//                           to="/nonBasmati"
+//                           style={{ fontWeight: "500" }}
+//                         >
+//                           Powdered Spices
+//                         </NavDropdown.Item>
+
+//                         {/* <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           IR 64 Parboiled
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           IR 64 Raw
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           Long Rain Raw
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           Long Rain Parboiled
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           100% Broken Rice
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           Swarna Raw
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           Swarna Parboiled
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/nonBasmati">
+//                           Sona Masuri Raw
+//                         </NavDropdown.Item> */}
+//                       </div>
+//                       {/* <div className="dropdown-column">
+//                         {/* <NavDropdown.Item
+//                           as={Link}
+//                           to="/riceother"
+//                           style={{ fontWeight: "bold" }}
+//                         >
+//                           Rice Other
+//                         </NavDropdown.Item> */}
+//                       {/* <NavDropdown.Item as={Link} to="/riceother">
+//                           Thai Long Grain Raw
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           Thai Long Grain
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           IRRI 6
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           IRRI 9
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           Super Karnel Basmati Rice
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           Pk 386
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           Japonica
+//                         </NavDropdown.Item>
+//                         <NavDropdown.Item as={Link} to="/riceother">
+//                           Calros
+//                         </NavDropdown.Item> */}
+//                       {/* </div> */}
+//                     </div>
+//                   </NavDropdown>
+//                 ) : (
+//                   <a
+//                     href="#all-products"
+//                     style={{ color: "#febd2f", marginRight: "1rem" }}
+//                   >
+//                     All Products
+//                   </a>
+//                 )}
+
+//                 {/* Pages Dropdown */}
+//                 {!isMobile ? (
+//                   <NavDropdown
+//                     title={
+//                       <div
+//                         style={{
+//                           display: "flex",
+//                           alignItems: "center",
+//                           color: "#febd2f",
+//                         }}
+//                       >
+//                         Pages
+//                         <KeyboardArrowDownIcon
+//                           sx={{
+//                             color: "#febd2f",
+//                             fontSize: "1rem",
+//                             transition: "transform 0.6s ease",
+//                             transform:
+//                               hoveredDropdown === 1
+//                                 ? "rotate(180deg)"
+//                                 : "rotate(0deg)",
+//                           }}
+//                         />
+//                       </div>
+//                     }
+//                     id="pages-dropdown"
+//                     className="nav-dropdown"
+//                     onMouseEnter={() => setHoveredDropdown(1)}
+//                     onMouseLeave={() => setHoveredDropdown(null)}
+//                     show={hoveredDropdown === 1}
+//                   >
+//                     <NavDropdown.Item as={Link} to="/about">
+//                       About
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/contact">
+//                       Contact us
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/faqs">
+//                       Faq's
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/articles">
+//                       Article Page
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/blog">
+//                       Blog Page
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/categories">
+//                       Category Page
+//                     </NavDropdown.Item>
+//                   </NavDropdown>
+//                 ) : (
+//                   <a
+//                     href="/pages"
+//                     style={{ color: "#febd2f", marginRight: "1rem" }}
+//                   >
+//                     Pages
+//                   </a>
+//                 )}
+
+//                 {/* Category Dropdown */}
+//                 {!isMobile ? (
+//                   <NavDropdown
+//                     title={
+//                       <div
+//                         style={{
+//                           display: "flex",
+//                           alignItems: "center",
+//                           color: "#febd2f",
+//                         }}
+//                       >
+//                         Category
+//                         <KeyboardArrowDownIcon
+//                           sx={{
+//                             color: "#febd2f",
+//                             fontSize: "1rem",
+//                             transition: "transform 0.6s ease",
+//                             transform:
+//                               hoveredDropdown === 2
+//                                 ? "rotate(180deg)"
+//                                 : "rotate(0deg)",
+//                           }}
+//                         />
+//                       </div>
+//                     }
+//                     id="category-dropdown"
+//                     className="nav-dropdown"
+//                     onMouseEnter={() => setHoveredDropdown(2)}
+//                     onMouseLeave={() => setHoveredDropdown(null)}
+//                     show={hoveredDropdown === 2}
+//                   >
+//                     <NavDropdown.Item as={Link} to="/basmati">
+//                       Forzen
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/nonBasmati">
+//                       Seasonal
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/riceother">
+//                       Organic
+//                     </NavDropdown.Item>
+//                     {/* <NavDropdown.Item as={Link} to="#action/3.3">Flour</NavDropdown.Item>
+//           <NavDropdown.Item as={Link} to="#action/3.3">Oil Seed</NavDropdown.Item>
+//           <NavDropdown.Item as={Link} to="#action/3.3">Vegetables</NavDropdown.Item> */}
+//                   </NavDropdown>
+//                 ) : (
+//                   <a
+//                     href="#category"
+//                     style={{ color: "#febd2f", marginRight: "1rem" }}
+//                   >
+//                     Category
+//                   </a>
+//                 )}
+
+//                 {/* Products Dropdown
+//                 {!isMobile ? (
+//                   <NavDropdown
+//                     title={
+//                       <div
+//                         style={{
+//                           display: "flex",
+//                           alignItems: "center",
+//                           color: "#febd2f",
+//                         }}
+//                       >
+//                         Products
+//                         <KeyboardArrowDownIcon
+//                           sx={{
+//                             color: "#febd2f",
+//                             fontSize: "1rem",
+//                             transition: "transform 0.6s ease",
+//                             transform:
+//                               hoveredDropdown === 3
+//                                 ? "rotate(180deg)"
+//                                 : "rotate(0deg)",
+//                           }}
+//                         />
+//                       </div>
+//                     }
+//                     id="products-dropdown"
+//                     className="nav-dropdown"
+//                     onMouseEnter={() => setHoveredDropdown(3)}
+//                     onMouseLeave={() => setHoveredDropdown(null)}
+//                     show={hoveredDropdown === 3}
+//                   >
+//                     <NavDropdown.Item as={Link} to="/flour">
+//                       Flour
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/">
+//                       Oil Seed
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/">
+//                       Vegetables
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/">
+//                       Spices-Whole
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/">
+//                       Spices
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item as={Link} to="/">
+//                       Pulese
+//                     </NavDropdown.Item>
+//                   </NavDropdown>
+//                 ) : (
+//                   <a
+//                     href="#products"
+//                     style={{ color: "#febd2f", marginRight: "1rem" }}
+//                   >
+//                     Products
+//                   </a>
+//                 )} */}
+
+//                 <Divider
+//                   className="d-none d-md-block" // Hide on small screens
+//                   orientation="vertical"
+//                   sx={{
+//                     borderColor: "#febd2f",
+//                     width: "2px",
+//                     height: "50px",
+//                     backgroundColor: "#febd2f",
+//                     marginLeft:"2rem"
+//                   }}
+//                 />
+//                 <Nav style={{ display: "flex", alignItems: "center" }}>
+//                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
+//       {/* Search Field */}
+//       <Search>
+//         <SearchIconWrapper>
+//           <SearchIcon />
+//         </SearchIconWrapper>
+//         <StyledInputBase placeholder="Search…" />
+//       </Search>
+
+//       {/* Person Icon (wrapped with Link) */}
+//       <Link to="/register" style={{ textDecoration: 'none',  }}>
+//         <PersonIcon
+//           sx={{
+//             color: "#febd2f",
+//             fontSize: "1.2rem",
+//           }}
+//         />
+//       </Link>
+//     </Box>
+//                   {/* <LanguageIcon
+//                   sx={{ color: "#febd2f", fontSize: "1.2rem", marginRight: 3 }}
+//                 /> */}
+//                 </Nav>
+
+//                 {/* Currency Dropdown */}
+//                 {/* {!isMobile ? (
+//                   <NavDropdown
+//                     title={
+//                       <div
+//                         style={{
+//                           display: "flex",
+//                           alignItems: "center",
+//                           color: "#febd2f",
+//                         }}
+//                       >
+//                         INR
+//                         <KeyboardArrowDownIcon
+//                           sx={{
+//                             color: "#febd2f",
+//                             fontSize: "1rem",
+//                             transition: "transform 0.6s ease",
+//                             transform:
+//                               hoveredDropdown === 5
+//                                 ? "rotate(180deg)"
+//                                 : "rotate(0deg)",
+//                           }}
+//                         />
+//                       </div>
+//                     }
+//                     id="INR-dropdown"
+//                     className="nav-dropdown"
+//                     onMouseEnter={() => setHoveredDropdown(5)}
+//                     onMouseLeave={() => setHoveredDropdown(null)}
+//                     show={hoveredDropdown === 5}
+//                   >
+//                     <NavDropdown.Item href="#action/3.1">
+//                       Dollar
+//                     </NavDropdown.Item>
+//                     <NavDropdown.Item href="#action/3.2">INR</NavDropdown.Item>
+//                     <NavDropdown.Item href="#action/3.3">EURO</NavDropdown.Item>
+//                     <NavDropdown.Divider />
+//                   </NavDropdown>
+//                 ) : (
+//                   <a
+//                     href="#currency"
+//                     style={{ color: "#febd2f", marginRight: "1rem" }}
+//                   >
+//                     INR
+//                   </a>
+//                 )} */}
+//               </Nav>
+//             </Navbar.Collapse>
+//             {/* Icons Outside the Navbar */}
+
+//             <Box sx={{ display: "flex", alignItems: "center", ml: "rem" }}>
+//               <Typography
+//                 onClick={handleOpenCartModal}
+//                 variant="h6"
+//                 fontSize="1rem"
+//                 gutterBottom
+//               >
+//                 <IconButton color="primary" aria-label="add to shopping cart">
+//                   <AddShoppingCartIcon sx={{ color: "#febd2f" }} />
+//                 </IconButton>
+//               </Typography>
+//             </Box>
+//           </Container>
+
+//           {/* Search Modal */}
+//           <Modal
+//             open={searchModalOpen}
+//             onClose={handleCloseModal}
+//             aria-labelledby="search-modal-title"
+//             aria-describedby="search-modal-description"
+//           >
+//             <div
+//               style={{
+//                 padding: "20px",
+//                 background: "#fff",
+//                 borderRadius: "8px",
+//                 width: "400px",
+//                 margin: "auto",
+//                 marginTop: "15%",
+//               }}
+//             >
+//               <h2 id="search-modal-title">Search</h2>
+//               <TextField
+//                 variant="outlined"
+//                 placeholder="Search Item and category"
+//                 fullWidth
+//                 sx={{
+//                   input: { color: "#febd2f" },
+//                   "& .MuiOutlinedInput-root": {
+//                     "& fieldset": { borderColor: "transparent" },
+//                     "&:hover fieldset": { borderColor: "transparent" },
+//                     "&.Mui-focused fieldset": { borderColor: "transparent" },
+//                   },
+//                   "& .MuiInputBase-input": {
+//                     color: "#febd2f",
+//                     padding: "8px",
+//                   },
+//                 }}
+//               />
+//             </div>
+//           </Modal>
+//         </Navbar>
+//       ))}
+//       {/* Cart Modal */}
+//       <div>
+//         {/* Cart Drawer */}
+//         <Drawer
+//           anchor="right"
+//           open={openCartModal}
+//           onClose={handleCloseCartModal}
+//         >
+//           <Typography
+//             variant="h6"
+//             gutterBottom
+//             sx={{ color: "#febd2f", backgroundColor: "#173334", p: 2 }}
+//           >
+//             My Cart
+//           </Typography>
+//           <Grid container spacing={2}>
+//             {/* Replace this with your actual product data */}
+//             {/* Rendering multiple CommonCard components */}
+//             {[].map((product) => (
+//               <CommonCard
+//                 key={product.id}
+//                 product={product}
+//                 onAddToCart={handleAddToCart}
+//               />
+//             ))}
+//           </Grid>
+//           <Box
+//             sx={{
+//               width: 400,
+//               padding: 2,
+//               color: "#febd2f",
+//               display: "flex",
+//               flexDirection: "column",
+//             }}
+//           >
+//             {cartItems.length === 0 ? (
+//               <Typography variant="body1">Your cart is empty.</Typography>
+//             ) : (
+//               cartItems.map((item, index) => (
+//                 <Box
+//                   key={index}
+//                   sx={{
+//                     marginBottom: 2,
+//                     backgroundColor: "#173334",
+//                     padding: 2,
+//                     borderRadius: 4,
+//                   }}
+//                 >
+//                   <Typography variant="body1">{item.name}</Typography>
+//                   <Typography variant="body2">
+//                     Quantity: {item.quantity}
+//                   </Typography>
+//                   <Typography variant="h6">Price: {item.price}</Typography>
+//                 </Box>
+//               ))
+//             )}
+//             <Button
+//               style={{
+//                 backgroundColor: isHovered ? "#febd2f" : "#173334",
+//                 color: isHovered ? "#173334" : "#febd2f",
+//                 borderColor: "#173334",
+//                 borderRadius: "0",
+//               }}
+//               onMouseEnter={() => setIsHovered(true)}
+//               onMouseLeave={() => setIsHovered(false)}
+//               onClick={handleCloseCartModal}
+//             >
+//               Close
+//             </Button>
+//           </Box>
+//         </Drawer>
+//       </div>
+//     </div>
+//   );
+// }
+// import React from 'react';
+// import "./Navbar.css";
+
+// function Navbar() {
+//   return (
+//     <>
+//     {/* marquee */}
+//     <div className="navbar-container">
+//       <p className="marquee-text">"Our website is under maintenance. We’re making improvements and will be back shortly. Thank you for your patience."</p>
+//     </div>
+//     </>
+//   );
+// }
+
+// export default Navbar;
