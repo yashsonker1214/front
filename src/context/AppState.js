@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext} from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify";
@@ -8,33 +8,15 @@ const AppContext = createContext();
 
 const url = "http://localhost:1000/api"; // Replace with your API URL
 
+
 // Inside AppState.js (or the file where you manage your context)
 
 const AppState = (props) => {
   // State to manage products, loading state, and error state
-  const [products, setProducts] = useState([]);  // Product state
-  const [loading, setLoading] = useState(true);   // Loading state
-  const [error, setError] = useState(null);       // Error state
+  
 
-  // Fetch products from the API when the component mounts
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(`${url}/products/all`, {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true, // If needed for cookies or sessions
-        });
-        setProducts(response.data.products || []);  // Store products in state
-        setLoading(false);  // Set loading to false once data is fetched
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setError(error.message || "An error occurred");
-        setLoading(false);  // Set loading to false if error occurs
-      }
-    };
 
-    fetchProducts();  // Invoke fetch function on component mount
-  }, []);  // Empty dependency array ensures this runs once after initial render
+ 
 
   // Register function to handle user registration
   const register = async (lastname, firstname, email, password) => {
@@ -118,7 +100,7 @@ const AppState = (props) => {
 
   // Wrap the children components with the context provider
   return (
-    <AppContext.Provider value={{ register, login, products, loading, error }}>
+    <AppContext.Provider value={{ register, login,  }}>
       {props.children}
     </AppContext.Provider>
   );

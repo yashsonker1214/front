@@ -5,11 +5,11 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import Delivery from "../GoceryDelivery/Delivery";
-import BestSellerCard from "../Card/BestSellerCard";
 import MessageComponent from "./Popup/Popup";
 import Image44 from "../../assets/img44.jpg"
 import Image51 from "../../assets/img51.jpg"
 import Image278 from "../../assets/img199.jpg"
+import ShowProduct from "../Product/ShowProduct";
  
 const Home = () => {
   return (
@@ -56,7 +56,8 @@ const Home = () => {
       {/* Carousel with autoPlay and infiniteLoop */}
 
       {/* Additional Components */}
-      <BestSellerCard />
+      <ShowProduct/>
+     
       <MessageComponent />
       <Delivery />
     </>

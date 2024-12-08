@@ -8,8 +8,9 @@ const Footer = () => {
     <footer className="footer">
       <div
         className="divider"
-        style={{ backgroundColor: "#febd2f", height: "2px",marginTop: "100px"}}
+        style={{ backgroundColor: "#febd2f", height: "2px"}}
       ></div>
+      
       <Grid
         container
         spacing={2}
@@ -22,7 +23,7 @@ const Footer = () => {
         }}
       >
         <Grid item lg={4}>
-          <Box sx={{ pb: 5, pt: 5 }}>
+          <Box sx={{ pb: 5, pt: 10 }}>
            
              <Typography variant="h4" color="#febd2f" sx={{pt: 1 ,pb:2}}>
              TheAgriGoods

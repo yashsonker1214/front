@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom"; // Import Link for navigation
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,6 +14,7 @@ import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
 import "./Navbar.css";
 import { Button, Divider, Drawer } from "@mui/material";
+import Marquee from "react-fast-marquee";
 
 const menuData = [
   {
@@ -23,17 +24,16 @@ const menuData = [
       {
         heading: "Flour 1",
         links: [
-          { name: "Syngenta", url: "/brands/syngenta" },
           { name: "Wheat Flour", url: "/flour/wheat-flour" },
           { name: "Maize(corn) Flour", url: "/flour/maize-flour" },
-          { name: "Rye Flour", url: "/flour/rye-flour" },
         ],
       },
       {
         heading: "Flour 2",
         links: [
           { name: "Brown Rice Flour", url: "/flour/brown-rice-flour" },
-          { name: "Soga Flour", url: "/flour/soga-flour" },
+          { name: "Ragi flour", url: "/flour/brown-rice-flour" },
+
           { name: "Tamarind Flour", url: "/flour/tamarind-flour" },
           { name: "Singhada Flour", url: "/flour/singhada-flour" },
         ],
@@ -41,7 +41,6 @@ const menuData = [
       {
         heading: "Flour 3",
         links: [
-          { name: "Mango Flour", url: "/flour/mango-flour" },
           { name: "White Flour", url: "/flour/white-flour" },
           { name: "Rice Flour", url: "/flour/rice-flour" },
           { name: "Millet Flour", url: "/flour/millet-flour" },
@@ -53,7 +52,6 @@ const menuData = [
           { name: "Oat Flour", url: "/flour/oat-flour" },
           { name: "Samolina", url: "/flour/samolina" },
           { name: "Gram Flour", url: "/flour/gram-flour" },
-          { name: "Soyabean Flour", url: "/flour/soyabean-flour" },
         ],
       },
     ],
@@ -75,7 +73,7 @@ const menuData = [
         heading: "Powdered Spices 2",
         links: [
           { name: "Dry Ginger", url: "/powderedspices/dry-ginger" },
-          { name: "Dry Mango Powder", url: "/powderedspices/dry-mango-powder" },
+
           { name: "Garam Masala", url: "/powderedspices/garam-masala" },
           { name: "Garlic Powder", url: "/powderedspices/garlic-powder" },
         ],
@@ -84,10 +82,7 @@ const menuData = [
         heading: "Powdered Spices 3",
         links: [
           { name: "Hing", url: "/powderedspices/hing" },
-          {
-            name: "Mixed Spice & Seas",
-            url: "/powderedspices/mixed-spice-seas",
-          },
+
           { name: "Onion Powder", url: "/powderedspices/onion-powder" },
           { name: "Paprika", url: "/powderedspices/paprika" },
         ],
@@ -138,9 +133,9 @@ const menuData = [
         heading: "Whole Spices 4",
         links: [
           { name: "Dill Seed", url: "/spices/dill-seed" },
-          { name: "Ajwan Seed", url: "/spices/ajwan-seed" },
+
           { name: "Mustard Seed", url: "/spices/mustard-seed" },
-          { name: "Ajwain", url: "/spices/ajwain" },
+          { name: "Ajwain Seed", url: "/spices/ajwain" },
         ],
       },
     ],
@@ -152,6 +147,8 @@ const menuData = [
       {
         heading: "Basmati Rice 1",
         links: [
+          { name: "1121 Golden Sella", url: "/basmati/1121-golden-sella" },
+
           { name: "1121 Golden Sella", url: "/basmati/1121-golden-sella" },
           { name: "1121 Steam Sella", url: "/basmati/1121-steam-sella" },
           { name: "PR11 Golden Sella", url: "/basmati/pr11-golden-sella" },
@@ -185,6 +182,7 @@ const menuData = [
           { name: "IR 64 Parboiled", url: "/nonBasmati/ir64-parboiled" },
           { name: "IR64 Raw", url: "/nonBasmati/ir64-raw" },
           { name: "Long Grain Raw", url: "/nonBasmati/long-grain-raw" },
+
           {
             name: "Long Grain Parboiled",
             url: "/nonBasmati/long-grain-parboiled",
@@ -207,6 +205,7 @@ const menuData = [
             name: "Sona Masuri Parboiled",
             url: "/nonBasmati/sona-masuri-parboiled",
           },
+          { name: "Chinnor And Kali mooch", url: "/basmati/1121-golden-sella" },
         ],
       },
     ],
@@ -404,9 +403,8 @@ function ResponsiveAppBar() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [open, setOpen] = useState(false);
 
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const handleMouseEnter = (menuName) => {
     setHoveredMenu(menuName);
@@ -416,21 +414,91 @@ function ResponsiveAppBar() {
     setHoveredMenu(null);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.pageYOffset;
+      
+      // Close dropdown if scrolled more than a small threshold (e.g., 20 pixels)
+      if (Math.abs(currentScrollPos - scrollPosition) > 20) {
+        setHoveredMenu(null);
+      }
+      
+      // Update scroll position
+      setScrollPosition(currentScrollPos);
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrollPosition]);
+
+  const handleMouseEnterScroll = (menuName) => {
+    if (!isScrolling) {
+      setHoveredMenu(menuName);
+    }
+  };
+
+  const handleMouseLeaveScroll = () => {
+    if (!isScrolling) {
+      setHoveredMenu(null);
+    }
+  };
+
+  useEffect(() => {
+    let scrollTimeout;
+
+    const handleScroll = () => {
+      // Set scrolling state
+      setIsScrolling(true);
+      setHoveredMenu(null);
+
+      // Clear the timeout
+      clearTimeout(scrollTimeout);
+
+      // Reset scrolling state after a short delay
+      scrollTimeout = setTimeout(() => {
+        setIsScrolling(false);
+      }, 200);
+    };
+
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(scrollTimeout);
+    };
+  }, []);
+
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
+
+
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "#173334", pb: 1 }}>
-        <p
+        <Marquee
           className="marquee-text"
-          style={{ backgroundColor: "#173334", color: "#febd2f" }}
+          style={{
+            backgroundColor: "#173334", // Background color of the marquee
+            color: "#febd2f", // Text color
+            whiteSpace: "nowrap", // Prevent text from wrapping
+            animation: "marquee 100s linear infinite", // Apply the marquee animation
+          }}
         >
-          "Our website is under maintenance. We’re making improvements and will
-          be back shortly. Thank you for your patience."
-        </p>
+          "Our website is under maintenance. We’re making improvements and will be back shortly. Thank you for your patience."
+        </Marquee>
 
-        {/* first  */}
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            {/* lgogo */}
+            {/* Logo */}
             <Typography
               variant="h6"
               noWrap
@@ -444,7 +512,7 @@ function ResponsiveAppBar() {
                 fontWeight: 700,
                 letterSpacing: ".1rem",
                 color: "#febd2f",
-                textDecoration: "none", // Ensure no decoration
+                textDecoration: "none",
                 "&:hover": {
                   color: "#febd2f",
                   textDecoration: "none",
@@ -479,9 +547,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1 }} />
 
             {/* Cart Icon and Text */}
-            <Box
-              sx={{ display: "flex", alignItems: "center", color: "#febd2f" }}
-            >
+            <Box sx={{ display: "flex", alignItems: "center", color: "#febd2f" }}>
               <Tooltip title="My Cart">
                 <IconButton
                   sx={{ p: 0, color: "#febd2f" }}
@@ -525,14 +591,7 @@ function ResponsiveAppBar() {
         <Divider sx={{ color: "#febd2f", my: 1, width: "100%", mx: 0 }} />
 
         <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "",
-
-              gap: 2,
-            }}
-          >
+          <Box sx={{ display: "flex", gap: 2 }}>
             {menuData.map((menu) => (
               <Box
                 key={menu.name}
@@ -555,11 +614,18 @@ function ResponsiveAppBar() {
                 {/* Dropdown Menu */}
                 {menu.submenu && hoveredMenu === menu.name && (
                   <Box
-                    onMouseEnter={() => handleMouseEnter(menu.name)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={(e) => {
+                      handleMouseEnter(menu.name);
+                      handleMouseEnterScroll(menu.name);  // Call handleMouseEnterScroll
+                    }}
+                    onMouseLeave={(e) => {
+                      handleMouseLeave();          // Call handleMouseLeave
+                      handleMouseLeaveScroll();    // Call handleMouseLeaveScroll
+                    }}
                     sx={{
                       position: "fixed",
-                      top: "165px",
+                     top:"153px",
+                     
                       left: 0,
                       right: 0,
                       backgroundColor: "#ffffff",
@@ -617,25 +683,16 @@ function ResponsiveAppBar() {
               </Box>
             ))}
           </Box>
-
-          {/* Mobile Menu */}
-
-          {/* Desktop Menu with Dropdown on Hover */}
         </Container>
       </AppBar>
-      {/* side drawer */}
+
+      {/* Side Drawer */}
       <Drawer
-        anchor="right" // The drawer will slide from the right side
+        anchor="right"
         open={open}
-        onClose={toggleDrawer} // Close the drawer when clicked outside or using the close button
+        onClose={toggleDrawer}
       >
-        <Box
-          sx={{
-            width: 350,
-            padding: 2,
-            backgroundColor: "#173334",
-          }}
-        >
+        <Box sx={{ width: 350, padding: 2, backgroundColor: "#173334" }}>
           <IconButton sx={{ p: 0, color: "#febd2f" }} onClick={toggleDrawer}>
             <Typography variant="h6" p={2}>
               Your Cart <ShoppingCartIcon />
@@ -645,9 +702,7 @@ function ResponsiveAppBar() {
         <Typography variant="body2" sx={{ mt: "10rem", ml: "5rem" }}>
           There are no products in your cart.
         </Typography>
-        <Button
-          sx={{ color: "#febd2f", backgroundColor: "#173334", m: "5rem" }}
-        >
+        <Button sx={{ color: "#febd2f", backgroundColor: "#173334", m: "5rem" }}>
           Continue Shopping
         </Button>
       </Drawer>
