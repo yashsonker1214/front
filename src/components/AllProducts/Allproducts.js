@@ -1,10 +1,13 @@
+import { Box } from '@mui/material'
 import React from 'react'
+import Navbar from '../Navbar/Navbar'
 
 function Allproducts() {
   return (
-    <div>
-      
-    </div>
+    <Box>
+    <Navbar />
+    
+  </Box>
   )
 }
 

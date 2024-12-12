@@ -17,6 +17,7 @@ import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArro
 // import BestSellerCard from "../Card/BestSellerCard";
 // import Blog from "../Blog/Blog";
 import Footer from "../Footer/Footer";
+import { Container } from "react-bootstrap";
 
 function Resizable() {
   const sliderRef = useRef(null); // Create a ref to control the slider
@@ -228,7 +229,15 @@ function Resizable() {
       </Box> */}
       {/* <BestSellerCard /> */}
       {/* <Blog /> */}
+      <Container maxWidth="lg" >
+      <img
+              src="https://media.bighaat.com/trustmarkers/tm_pdp_page_v2.webp?w=1200&q=80"
+              alt="Modern Accessories"
+              style={{ maxWidth: "fullwidth", height: "auto" }} 
+            />
+      </Container>
       
+
       <Box sx={{ backgroundColor: "#173334", overflow: "hidden" }}>
         
       <Footer/>

@@ -1,19 +1,36 @@
-import React, { createContext} from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify";
 
-// Create a context
+
 const AppContext = createContext();
 
-const url = "http://localhost:1000/api"; // Replace with your API URL
+const url = "http://localhost:1000/api";
 
 
-// Inside AppState.js (or the file where you manage your context)
+
 
 const AppState = (props) => {
-  // State to manage products, loading state, and error state
-  
+  const [products, setProducts] = useState([]); 
+ 
+  useEffect(() => {
+    axios
+      .get(`${url}/products/all`)
+      .then((response) => {
+        console.log("Fetched products:", response.data.products);  // Log the products array
+        setProducts(response.data.products);  // Set the products array correctly
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        toast.error("Failed to fetch products.", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "dark",
+          transition: Bounce,
+        });
+      });
+  }, []);
 
 
  
@@ -100,7 +117,7 @@ const AppState = (props) => {
 
   // Wrap the children components with the context provider
   return (
-    <AppContext.Provider value={{ register, login,  }}>
+    <AppContext.Provider value={{ register, login, products }}>
       {props.children}
     </AppContext.Provider>
   );

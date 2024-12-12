@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppState from "./context/AppState";  // Your context provider
-
-// Import your components
 import Basmati from './components/AllProducts/Basmati';
 import Category from './components/Category/Category';
 import Pages from './components/Page/Pages';
@@ -25,18 +23,28 @@ import Login from "./components/Login/Login";
 import ShowProduct from "./components/Product/ShowProduct";
 import './assets/font/fonts.css';
 import './App.css';
+import Allproducts from "./components/AllProducts/Allproducts";
+import SearchProduct from "./components/Product/SearchProduct";
+import ProductDetail from "./components/Product/ProductDetails";
 
 function App() {
   return (
     <AppState>
       <Router>
+      
+        
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/" element={<ShowProduct />} />
+          <Route path="/product/search/:term" element={<SearchProduct />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/Allproducts" element={<Allproducts />} />
+
        
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/basmati" element={<Basmati />} />
+          <Route path="/Basmati" element={<Basmati />} />
           <Route path="/nonBasmati" element={<NonBasmati />} />
           <Route path="/riceother" element={<Riceother />} />
           <Route path="/products" element={<Category />} />

@@ -30,7 +30,7 @@ import Footer from "../Footer/Footer";
 import BestSellerCard from "../Card/BestSellerCard";
 import BrushIcon from "@mui/icons-material/Brush";
 
-export default function Basmati() {
+ function Basmati() {
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
   const [openSnackbar, setOpenSnackbar] = useState(false);
 const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -711,3 +711,4 @@ const handleShowAllChange = (event) => {
     </>
   );
 }
+export default Basmati;

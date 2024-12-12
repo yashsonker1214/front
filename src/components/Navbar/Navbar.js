@@ -16,186 +16,187 @@ import "./Navbar.css";
 import { Button, Divider, Drawer } from "@mui/material";
 import Marquee from "react-fast-marquee";
 
+
 const menuData = [
   {
     name: "Flour",
-    url: "/flour",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Flour 1",
         links: [
-          { name: "Wheat Flour", url: "/flour/wheat-flour" },
-          { name: "Maize(corn) Flour", url: "/flour/maize-flour" },
+          { name: "Wheat Flour", url: "/Allproducts" },
+          { name: "Maize(corn) Flour", url: "/basmati" },
         ],
       },
       {
         heading: "Flour 2",
         links: [
-          { name: "Brown Rice Flour", url: "/flour/brown-rice-flour" },
-          { name: "Ragi flour", url: "/flour/brown-rice-flour" },
+          { name: "Brown Rice Flour", url: "/Allproducts" },
+          { name: "Ragi flour", url: "/Allproducts" },
 
-          { name: "Tamarind Flour", url: "/flour/tamarind-flour" },
-          { name: "Singhada Flour", url: "/flour/singhada-flour" },
+          { name: "Tamarind Flour", url: "/Allproducts" },
+          { name: "Singhada Flour", url: "/Allproducts" },
         ],
       },
       {
         heading: "Flour 3",
         links: [
-          { name: "White Flour", url: "/flour/white-flour" },
-          { name: "Rice Flour", url: "/flour/rice-flour" },
-          { name: "Millet Flour", url: "/flour/millet-flour" },
+          { name: "White Flour", url: "/Allproducts" },
+          { name: "Rice Flour", url: "/Allproducts" },
+          { name: "Millet Flour", url: "/Allproducts-flour" },
         ],
       },
       {
         heading: "Flour 4",
         links: [
-          { name: "Oat Flour", url: "/flour/oat-flour" },
-          { name: "Samolina", url: "/flour/samolina" },
-          { name: "Gram Flour", url: "/flour/gram-flour" },
+          { name: "Oat Flour", url: "/Allproducts" },
+          { name: "Samolina", url: "/Allproducts" },
+          { name: "Gram Flour", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Powdered Spices",
-    url: "/powderedspices",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Powdered Spices 1",
         links: [
-          { name: "Black Pepper", url: "/powderedspices/black-pepper" },
-          { name: "Red Chilly", url: "/powderedspices/red-chilly" },
-          { name: "Coriander", url: "/powderedspices/coriander" },
-          { name: "Cumin", url: "/powderedspices/cumin" },
+          { name: "Black Pepper", url: "/Allproducts" },
+          { name: "Red Chilly", url: "/Allproducts" },
+          { name: "Coriander", url: "/Allproduts" },
+          { name: "Cumin", url: "/Allproducts" },
         ],
       },
       {
         heading: "Powdered Spices 2",
         links: [
-          { name: "Dry Ginger", url: "/powderedspices/dry-ginger" },
+          { name: "Dry Ginger", url: "/Allproducts" },
 
-          { name: "Garam Masala", url: "/powderedspices/garam-masala" },
-          { name: "Garlic Powder", url: "/powderedspices/garlic-powder" },
+          { name: "Garam Masala", url: "/Allproducts" },
+          { name: "Garlic Powder", url: "/Allproducts" },
         ],
       },
       {
         heading: "Powdered Spices 3",
         links: [
-          { name: "Hing", url: "/powderedspices/hing" },
+          { name: "Hing", url: "/Allproducts" },
 
-          { name: "Onion Powder", url: "/powderedspices/onion-powder" },
-          { name: "Paprika", url: "/powderedspices/paprika" },
+          { name: "Onion Powder", url: "/Allproducts" },
+          { name: "Paprika", url: "/Allproducts" },
         ],
       },
       {
         heading: "Powdered Spices 4",
         links: [
-          { name: "Turmeric", url: "/powderedspices/turmeric" },
-          { name: "White Pepper", url: "/powderedspices/white-pepper" },
-          { name: "Fennel Seeds", url: "/powderedspices/fennel-seeds" },
-          { name: "Cinnamon", url: "/powderedspices/cinnamon" },
+          { name: "Turmeric", url: "/Allproducts" },
+          { name: "White Pepper", url: "/Allproducts" },
+          { name: "Fennel Seeds", url: "/Allproducts" },
+          { name: "Cinnamon", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Spices-Whole",
-    url: "/spices",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Whole Spices 1",
         links: [
-          { name: "Black Pepper", url: "/spices/black-pepper" },
-          { name: "Dried Red Chilly", url: "/spices/dried-red-chilly" },
-          { name: "Cloves", url: "/spices/cloves" },
-          { name: "Nutmeg", url: "/spices/nutmeg" },
+          { name: "Black Pepper", url: "/Allproducts" },
+          { name: "Dried Red Chilly", url: "/Allproducts" },
+          { name: "Cloves", url: "/Allproducts" },
+          { name: "Nutmeg", url: "/Allproducts" },
         ],
       },
       {
         heading: "Whole Spices 2",
         links: [
-          { name: "Mace", url: "/spices/mace" },
-          { name: "Large Cardamom", url: "/spices/large-cardamom" },
-          { name: "Green Cardamom", url: "/spices/green-cardamom" },
-          { name: "Cumin Seeds", url: "/spices/cumin-seeds" },
+          { name: "Mace", url: "/Allproducts" },
+          { name: "Large Cardamom", url: "/Allproducts" },
+          { name: "Green Cardamom", url: "/Allproducts" },
+          { name: "Cumin Seeds", url: "/Allproducts" },
         ],
       },
       {
         heading: "Whole Spices 3",
         links: [
-          { name: "Star Anise", url: "/spices/star-anise" },
-          { name: "Dried Ginger", url: "/spices/dried-ginger" },
-          { name: "Dried Turmeric", url: "/spices/dried-turmeric" },
-          { name: "Fenugreek Seed", url: "/spices/fenugreek-seed" },
+          { name: "Star Anise", url: "/Allproducts" },
+          { name: "Dried Ginger", url: "/Allproducts" },
+          { name: "Dried Turmeric", url: "/Allproducts" },
+          { name: "Fenugreek Seed", url: "/Allproducts" },
         ],
       },
       {
         heading: "Whole Spices 4",
         links: [
-          { name: "Dill Seed", url: "/spices/dill-seed" },
+          { name: "Dill Seed", url: "/Allproducts" },
 
-          { name: "Mustard Seed", url: "/spices/mustard-seed" },
-          { name: "Ajwain Seed", url: "/spices/ajwain" },
+          { name: "Mustard Seed", url: "/Allproducts" },
+          { name: "Ajwain Seed", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Basmati Rice",
-    url: "/basmati",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Basmati Rice 1",
         links: [
-          { name: "1121 Golden Sella", url: "/basmati/1121-golden-sella" },
+          { name: "1121 Golden Sella", url: "/Allproducts" },
 
-          { name: "1121 Golden Sella", url: "/basmati/1121-golden-sella" },
-          { name: "1121 Steam Sella", url: "/basmati/1121-steam-sella" },
-          { name: "PR11 Golden Sella", url: "/basmati/pr11-golden-sella" },
-          { name: "PR11 Steam Sella", url: "/basmati/pr11-steam-sella" },
+          { name: "1121 Golden Sella", url: "/Allproducts" },
+          { name: "1121 Steam Sella", url: "/Allproducts" },
+          { name: "PR11 Golden Sella", url: "/Allproducts" },
+          { name: "PR11 Steam Sella", url: "/Allproducts" },
         ],
       },
       {
         heading: "Basmati Rice 2",
         links: [
-          { name: "PR11 Creamy Sella", url: "/basmati/pr11-creamy-sella" },
-          { name: "Sharbati", url: "/basmati/sharbati" },
-          { name: "Sugandha", url: "/basmati/sugandha" },
-          { name: "Pusa", url: "/basmati/pusa" },
+          { name: "PR11 Creamy Sella", url: "/Allproducts" },
+          { name: "Sharbati", url: "/Allproducts" },
+          { name: "Sugandha", url: "/Allproducts" },
+          { name: "Pusa", url: "/Allproducts" },
         ],
       },
       {
         heading: "Basmati Rice 3",
         links: [
-          { name: "1509 Basmati Rice", url: "/basmati/1509-basmati-rice" },
+          { name: "1509 Basmati Rice", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Non-Basmati",
-    url: "/nonBasmati",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Non-Basmati Rice 1",
         links: [
-          { name: "IR 64 Parboiled", url: "/nonBasmati/ir64-parboiled" },
-          { name: "IR64 Raw", url: "/nonBasmati/ir64-raw" },
-          { name: "Long Grain Raw", url: "/nonBasmati/long-grain-raw" },
+          { name: "IR 64 Parboiled", url: "/Allproducts" },
+          { name: "IR64 Raw", url: "/Allproducts" },
+          { name: "Long Grain Raw", url: "/Allproducts" },
 
           {
             name: "Long Grain Parboiled",
-            url: "/nonBasmati/long-grain-parboiled",
+            url: "/Allproducts",
           },
         ],
       },
       {
         heading: "Non-Basmati Rice 2",
         links: [
-          { name: "100% Broken Rice", url: "/nonBasmati/100-broken-rice" },
-          { name: "Swarna Raw", url: "/nonBasmati/swarna-raw" },
-          { name: "Swarna Parboiled", url: "/nonBasmati/swarna-parboiled" },
-          { name: "Sona Masuri Raw", url: "/nonBasmati/sona-masuri-raw" },
+          { name: "100% Broken Rice", url: "/Allproducts" },
+          { name: "Swarna Raw", url: "/Allproducts" },
+          { name: "Swarna Parboiled", url: "/Allproducts" },
+          { name: "Sona Masuri Raw", url: "/Allproducts" },
         ],
       },
       {
@@ -203,27 +204,27 @@ const menuData = [
         links: [
           {
             name: "Sona Masuri Parboiled",
-            url: "/nonBasmati/sona-masuri-parboiled",
+            url: "/Allproducts",
           },
-          { name: "Chinnor And Kali mooch", url: "/basmati/1121-golden-sella" },
+          { name: "Chinnor And Kali mooch", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Rice-other",
-    url: "/riceother",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Rice-Other 1",
         links: [
           {
             name: "Thai Long Grain Raw",
-            url: "/riceother/thai-long-grain-raw",
+            url: "/Allproducts",
           },
-          { name: "Thai Long Grain", url: "/riceother/thai-long-grain" },
-          { name: "IRRI 6", url: "/riceother/irri-6" },
-          { name: "IRRI 9", url: "/riceother/irri-9" },
+          { name: "Thai Long Grain", url: "/Allproducts" },
+          { name: "IRRI 6", url: "/Allproducts" },
+          { name: "IRRI 9", url: "/Allproducts" },
         ],
       },
       {
@@ -231,129 +232,129 @@ const menuData = [
         links: [
           {
             name: "Super Karnel Basmati Rice",
-            url: "/riceother/super-karnel-basmati-rice",
+            url: "/Allproducts",
           },
-          { name: "PK 386", url: "/riceother/pk-386" },
-          { name: "Japanica", url: "/riceother/japanica" },
-          { name: "Calros", url: "/riceother/calros" },
+          { name: "PK 386", url: "/Allproducts" },
+          { name: "Japanica", url: "/Allproducts" },
+          { name: "Calros", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Grains",
-    url: "/grains",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Grains 1",
         links: [
-          { name: "Wheat", url: "/grains/wheat" },
-          { name: "Maize", url: "/grains/maize" },
-          { name: "Yellow Corn", url: "/grains/yellow-corn" },
-          { name: "Millet", url: "/grains/millet" },
+          { name: "Wheat", url: "/Allproducts" },
+          { name: "Maize", url: "/Allproducts" },
+          { name: "Yellow Corn", url: "/Allproducts" },
+          { name: "Millet", url: "/Allproducts" },
         ],
       },
       {
         heading: "Grains 2",
         links: [
-          { name: "Bajra", url: "/grains/bajra" },
-          { name: "Sorghum", url: "/grains/sorghum" },
-          { name: "Ragi", url: "/grains/ragi" },
-          { name: "Oats", url: "/grains/oats" },
+          { name: "Bajra", url: "/Allproducts" },
+          { name: "Sorghum", url: "/Allproducts" },
+          { name: "Ragi", url: "/Allproducts" },
+          { name: "Oats", url: "/Allproducts" },
         ],
       },
       {
         heading: "Grains 3",
         links: [
-          { name: "Buckwheat", url: "/grains/buckwheat" },
-          { name: "Durum Wheat", url: "/grains/durum-wheat" },
+          { name: "Buckwheat", url: "/Allproducts" },
+          { name: "Durum Wheat", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Oil Seed",
-    url: "/oilseed",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Oil Seeds 1",
         links: [
-          { name: "Rapeseed", url: "/oilseed/rapeseed" },
-          { name: "Soyabean Seeds", url: "/oilseed/soyabean-seeds" },
-          { name: "Sunflower Seeds", url: "/oilseed/sunflower-seeds" },
-          { name: "Corn Seeds", url: "/oilseed/corn-seeds" },
+          { name: "Rapeseed", url: "/Allproducts" },
+          { name: "Soyabean Seeds", url: "/Allproducts" },
+          { name: "Sunflower Seeds", url: "/Allproducts" },
+          { name: "Corn Seeds", url: "/Allproducts" },
         ],
       },
       {
         heading: "Oil Seeds 2",
         links: [
-          { name: "Sesame Seeds", url: "/oilseed/sesame-seeds" },
-          { name: "Cotton Seeds", url: "/oilseed/cotton-seeds" },
-          { name: "Flaxseed", url: "/oilseed/flaxseed" },
-          { name: "Peanut", url: "/oilseed/peanut" },
+          { name: "Sesame Seeds", url: "/Allproducts" },
+          { name: "Cotton Seeds", url: "/Allproducts" },
+          { name: "Flaxseed", url: "/Allproducts" },
+          { name: "Peanut", url: "/Allproducts" },
         ],
       },
       {
         heading: "Oil Seeds 3",
         links: [
-          { name: "Palm Oil", url: "/oilseed/palm-oil" },
-          { name: "Coconut", url: "/oilseed/coconut" },
+          { name: "Palm Oil", url: "/Allproducts" },
+          { name: "Coconut", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Pulses",
-    url: "/pulses",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Pulses 1",
         links: [
-          { name: "Chickpeas", url: "/pulses/chickpeas" },
-          { name: "Mung Bean", url: "/pulses/mung-bean" },
-          { name: "Lentil", url: "/pulses/lentil" },
-          { name: "Pigeon Pea", url: "/pulses/pigeon-pea" },
+          { name: "Chickpeas", url: "/Allproducts" },
+          { name: "Mung Bean", url: "/Allproducts" },
+          { name: "Lentil", url: "/Allproducts" },
+          { name: "Pigeon Pea", url: "/Allproducts" },
         ],
       },
       {
         heading: "Pulses 2",
         links: [
-          { name: "Kidney Beans", url: "/pulses/kidney-beans" },
-          { name: "Urad Dal", url: "/pulses/urad-dal" },
-          { name: "Lima Beans", url: "/pulses/lima-beans" },
-          { name: "Black Eyed Peas", url: "/pulses/black-eyed-peas" },
+          { name: "Kidney Beans", url: "/Allproducts" },
+          { name: "Urad Dal", url: "/Allproducts" },
+          { name: "Lima Beans", url: "/Allproducts" },
+          { name: "Black Eyed Peas", url: "/Allproducts" },
         ],
       },
       {
         heading: "Pulses 3",
         links: [
-          { name: "Horse Gram", url: "/pulses/horse-gram" },
-          { name: "Moth Beans", url: "/pulses/moth-beans" },
-          { name: "Green Beans", url: "/pulses/green-beans" },
-          { name: "Split Pea", url: "/pulses/split-pea" },
+          { name: "Horse Gram", url: "/Allproducts" },
+          { name: "Moth Beans", url: "/Allproducts" },
+          { name: "Green Beans", url: "/Allproducts" },
+          { name: "Split Pea", url: "/Allproducts" },
         ],
       },
       {
         heading: "Pulses 4",
         links: [
-          { name: "Split Pigeon Peas", url: "/pulses/split-pigeon-peas" },
-          { name: "Split Pea Gram", url: "/pulses/split-pea-gram" },
-          { name: "Bambara Beans", url: "/pulses/bambara-beans" },
-          { name: "Lupine", url: "/pulses/lupine" },
+          { name: "Split Pigeon Peas", url: "/Allproducts" },
+          { name: "Split Pea Gram", url: "/Allproducts" },
+          { name: "Bambara Beans", url: "/Allproducts" },
+          { name: "Lupine", url: "/Allproducts" },
         ],
       },
     ],
   },
   {
     name: "Vegetables",
-    url: "/vegetables",
+    url: "/Allproducts",
     submenu: [
       {
         heading: "Vegetables 1",
         links: [
-          { name: "Red Onion", url: "/vegetables/red-onion" },
-          { name: "White Onion", url: "/vegetables/white-onion" },
-          { name: "Potato", url: "/vegetables/potato" },
+          { name: "Red Onion", url: "/Allproducts" },
+          { name: "White Onion", url: "/Allproducts" },
+          { name: "Potato", url: "/Allproducts" },
         ],
       },
     ],
@@ -624,7 +625,7 @@ function ResponsiveAppBar() {
                     }}
                     sx={{
                       position: "fixed",
-                     top:"153px",
+                     
                      
                       left: 0,
                       right: 0,
@@ -660,19 +661,18 @@ function ResponsiveAppBar() {
                               mx: 0,
                             }}
                           />
-                          {column.links.map((link) => (
-                            <NavLink
-                              key={link.name}
-                              to={link.url}
+                          {column.links.map((links) => (
+                              <NavLink
+                              key={links.name}
+                              to={links.url}
                               style={{
                                 textDecoration: "none",
-                                paddingTop: 10,
                                 color: "black",
                                 display: "block",
                                 marginBottom: "8px",
                               }}
                             >
-                              {link.name}
+                              {links.name}
                             </NavLink>
                           ))}
                         </Box>

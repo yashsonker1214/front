@@ -347,6 +347,7 @@ export default function Delivery() {
         </Grid>
       
       </Grid>
+    
       <Testemonials/>
       
       {/* CSS for Fade Transition */}
@@ -356,6 +357,7 @@ export default function Delivery() {
           transition: opacity 0.3s ease-in-out;
         }
       `}</style>
+      
     </div>
   );
 }
