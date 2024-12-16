@@ -171,7 +171,7 @@ const Login = () => {
                     value={password}
                     onChange={onChangeHandler}
                     type={showPassword ? "text" : "password"}
-                   
+                    autoComplete="current-password" // For login
                     variant="outlined"
                     fullWidth
                     required
