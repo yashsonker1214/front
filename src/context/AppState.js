@@ -7,7 +7,7 @@ import { Bounce } from "react-toastify";
 const AppContext = createContext();
 
 // const url = "http://localhost:1000/api";
- const url ="https://theagrigoods.onrender.com/"
+const url = "https://theagrigoods.onrender.com";
 
 
 
