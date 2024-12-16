@@ -24,8 +24,8 @@ import ShowProduct from "./components/Product/ShowProduct";
 import './assets/font/fonts.css';
 import './App.css';
 import Allproducts from "./components/AllProducts/Allproducts";
-import SearchProduct from "./components/Product/SearchProduct";
-import ProductDetail from "./components/Product/ProductDetails";
+import  ProductDetails from "./components/Product/ProductDetails";
+
 
 function App() {
   return (
@@ -35,10 +35,17 @@ function App() {
         
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<ShowProduct />} />
-          <Route path="/product/search/:term" element={<SearchProduct />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
+           {/* Define the Home route */}
+        <Route path="/" element={<Home />} />
+        
+        {/* Show Products route */}
+        <Route path="/product" element={<ShowProduct />} />
+
+{/* Route for displaying individual product details */}
+<Route path="/product/:productId" element={<ProductDetails />} />
+
+        {/* All products route */}
+   
           <Route path="/Allproducts" element={<Allproducts />} />
 
        

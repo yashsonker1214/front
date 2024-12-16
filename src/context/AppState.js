@@ -6,7 +6,8 @@ import { Bounce } from "react-toastify";
 
 const AppContext = createContext();
 
-const url = "http://localhost:1000/api";
+// const url = "http://localhost:1000/api";
+ const url ="https://theagrigoods.onrender.com/"
 
 
 
@@ -16,7 +17,7 @@ const AppState = (props) => {
  
   useEffect(() => {
     axios
-      .get(`${url}/products/all`)
+      .get(`${url}/product/all`)
       .then((response) => {
         console.log("Fetched products:", response.data.products);  // Log the products array
         setProducts(response.data.products);  // Set the products array correctly

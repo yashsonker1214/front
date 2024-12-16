@@ -31,7 +31,7 @@ const RelatedProduct = ({ category }) => {
                   style={{ width: "18rem" }}
                 >
                   <Link
-                    to={`/product/${product._id}`}
+                    to={`/products/${product._id}`}
                     className="d-flex justify-content-center align-items-center p-3"
                   >
                     <img
