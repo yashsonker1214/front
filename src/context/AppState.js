@@ -3,24 +3,24 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify";
 
-
+// Context and State URL
 const AppContext = createContext();
 
-// const url = "http://localhost:1000/api";
-const url = "https://api-6-p9tr.onrender.com/";
-
-
-
+// Production backend URL
+const url = "https://back-2-sw23.onrender.com"; // Replace this URL with your actual production URL
 
 const AppState = (props) => {
-  const [products, setProducts] = useState([]); 
- 
+  const [products, setProducts] = useState([]);
+  const [user, setUser] = useState(null); // User info after successful registration/login
+
+  const isAuthenticated = user !== null; // Check if user is authenticated
+
+  // Fetch products from the server
   useEffect(() => {
     axios
       .get(`${url}/product/all`)
       .then((response) => {
-        console.log("Fetched products:", response.data.products);  // Log the products array
-        setProducts(response.data.products);  // Set the products array correctly
+        setProducts(response.data.products); // Set the products correctly
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -33,46 +33,21 @@ const AppState = (props) => {
       });
   }, []);
 
-
- 
-
   // Register function to handle user registration
-  const register = async (lastname, firstname, email, password) => {
+  const register = async (firstName, lastName, email, password) => {
     try {
-      const response = await axios.post(
-        `${url}/user/register`, 
-        { firstname, lastname, email, password }, 
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,  // Send cookies if required
-        }
-      );
-      
-      // Notify success on successful registration
-      toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 1500,
-        theme: "dark",
-        transition: Bounce,
+      const response = await axios.post(`${url}/user/register`, {
+        firstName,
+        lastName,
+        email,
+        password,
       });
-
-      return response.data;  // Return response data
+      setUser(response.data); // Set user in state if registration is successful
+      toast.success('Registration successful!');
+      return { success: true };
     } catch (error) {
-      console.error("Registration Error:", error);
-      
-      // Notify error if registration fails
-      toast.error(
-        error.response?.data?.message || "An error occurred. Please try again.",
-        {
-          position: "top-right",
-          autoClose: 3000,
-          theme: "dark",
-          transition: Bounce,
-        }
-      );
-
-      // Return failure message on error
-      return { success: false, message: "Registration failed." };
+      toast.error(error.response?.data?.message || 'Registration failed');
+      return { success: false, message: error.response?.data?.message };
     }
   };
 
@@ -80,26 +55,29 @@ const AppState = (props) => {
   const login = async (email, password) => {
     try {
       const response = await axios.post(
-        `${url}/user/login`, 
-        { email, password }, 
+        `${url}/user/login`,
+        { email, password },
         {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,  // Send cookies if required
+          withCredentials: true, // Required if the backend uses cookies/sessions for authentication
         }
       );
-
-      // Notify success on successful login
+  
+      // Handle success
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 1500,
         theme: "dark",
         transition: Bounce,
       });
-
-      return response.data;  // Return response data
+  
+      // Set user in context after successful login
+      setUser(response.data.user); // Make sure the `response.data.user` is correct
+      return response.data; // Return the response
     } catch (error) {
+      // Log the error
       console.error("Login Error:", error);
-      
+  
       // Notify error if login fails
       toast.error(
         error.response?.data?.message || "Login failed. Please try again.",
@@ -110,15 +88,13 @@ const AppState = (props) => {
           transition: Bounce,
         }
       );
-
-      // Return failure message on error
+  
       return { success: false, message: "Login failed." };
     }
   };
 
-  // Wrap the children components with the context provider
   return (
-    <AppContext.Provider value={{ register, login, products }}>
+    <AppContext.Provider value={{ register, login, products, user, isAuthenticated }}>
       {props.children}
     </AppContext.Provider>
   );
@@ -126,4 +102,3 @@ const AppState = (props) => {
 
 export { AppContext, AppState };
 export default AppState;
-

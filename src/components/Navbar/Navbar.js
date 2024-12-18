@@ -572,7 +572,7 @@ function ResponsiveAppBar() {
                 </IconButton>
               </Tooltip>
               <Link
-                to="/login" // Change this to "/register" if you want the registration page
+                to="/register" // Change this to "/register" if you want the registration page
                 style={{
                   textDecoration: "none", // Remove default underline from the link
                   color: "inherit", // Inherit color from parent

@@ -13,9 +13,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  
 } from "@mui/material";
-import { AppContext } from "../../context/AppState";
+import { AppContext } from "../../context/AppState"; // Access context here
 import CustomNavbar from "../Navbar/Navbar";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import Footer from "../Footer/Footer";
@@ -25,7 +24,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { login, user } = useContext(AppContext);// Access login function from context
+  const { login, isAuthenticated } = useContext(AppContext); // Access login and isAuthenticated from context
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +40,7 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const result = await login(email, password);
+    const result = await login(email, password); // Use login from context
 
     if (result.success) {
       toast.success("Login successful!");
@@ -51,12 +50,13 @@ const Login = () => {
       setOpenDialog(true); // Open the dialog
     }
   };
-   // Redirect if user is already logged in
-   useEffect(() => {
-    if (user) {
+
+  // Redirect if user is already logged in
+  useEffect(() => {
+    if (isAuthenticated) {
       navigate("/"); // Redirect to dashboard if the user is logged in
     }
-  }, [user, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
@@ -64,9 +64,8 @@ const Login = () => {
 
   return (
     <>
-     <CustomNavbar />
-      <Container maxWidth="xl" sx={{ marginTop: "5rem", }}>
-       
+      <CustomNavbar />
+      <Container maxWidth="xl" sx={{ marginTop: "5rem" }}>
         <Grid
           container
           direction="column"
@@ -109,7 +108,7 @@ const Login = () => {
             <Typography
               variant="h4"
               align="center"
-              sx={{ color: "#173334", fontWeight: "600",mb:'2rem', }}
+              sx={{ color: "#173334", fontWeight: "600", mb: '2rem' }}
             >
               Log In
             </Typography>
@@ -123,7 +122,6 @@ const Login = () => {
               margin: "auto",
               backgroundColor: "#fff",
               borderRadius: "0px",
-
               border: "1px solid #ddd",
             }}
           >
@@ -138,47 +136,50 @@ const Login = () => {
               <Grid container spacing={2}>
                 {/* Email and Password Fields */}
                 <Grid item xs={12} sm={6}>
-                <Typography
-                  variant="body1"
-                  sx={{ color: "#173334", marginBottom: "0.5rem" }}
-                >
-                  Email
-                </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ color: "#173334", marginBottom: "0.5rem" }}
+                  >
+                    Email
+                  </Typography>
                   <TextField
                     name="email"
                     value={email}
                     onChange={onChangeHandler}
                     type="email"
-                    
                     variant="outlined"
                     fullWidth
                     required
-                    sx={{ borderRadius: 0, // Remove border radius for the entire TextField
+                    sx={{
+                      borderRadius: 0,
                       '& .MuiOutlinedInput-root': {
-                        borderRadius: 0, // Remove border radius from the input element
-                      },}}
+                        borderRadius: 0,
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                <Typography
-                  variant="body1"
-                  sx={{ color: "#173334", marginBottom: "0.5rem" }}
-                >
-                  Password
-                </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{ color: "#173334", marginBottom: "0.5rem" }}
+                  >
+                    Password
+                  </Typography>
                   <TextField
                     name="password"
                     value={password}
                     onChange={onChangeHandler}
                     type={showPassword ? "text" : "password"}
-                    autoComplete="current-password" // For login
+                    autoComplete="current-password"
                     variant="outlined"
                     fullWidth
                     required
-                    sx={{ borderRadius: 0, // Remove border radius for the entire TextField
+                    sx={{
+                      borderRadius: 0,
                       '& .MuiOutlinedInput-root': {
-                        borderRadius: 0, // Remove border radius from the input element
-                      },}}
+                        borderRadius: 0,
+                      },
+                    }}
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -193,7 +194,6 @@ const Login = () => {
                     }}
                   />
                 </Grid>
-                {/* <Divider sx={{ width: "100%",mt:'2rem',ml:"1rem" }} /> */}
 
                 {/* Forgot Password */}
                 <Grid
@@ -210,7 +210,6 @@ const Login = () => {
                   >
                     Forgot Password?
                   </Link>
-                  
                   <Button
                     type="submit"
                     variant="contained"
@@ -230,64 +229,60 @@ const Login = () => {
                   >
                     Login <ArrowRightAltIcon sx={{ fontSize: "2rem" }} />
                   </Button>
-                  
+                 
                 </Grid>
+                <Grid
+  item
+  xs={12}
+  display="flex"
+  justifyContent="center"
+  sx={{ mt: "1rem" }} // Adds space between login button and registration button
+>
+  <Link
+    to="/register"
+    style={{
+      textDecoration: "none", // Remove underline
+      width: "100%", // Full width of container
+    }}
+  >
+    <Button
+      variant="outlined"
+      sx={{
+        padding: "10px 20px",
+        fontSize: "1rem",
+        fontWeight: "500",
+        borderRadius: "0px",
+        color: "#febd2f",
+        borderColor: "#febd2f",
+        "&:hover": {
+          backgroundColor: "#febd2f",
+          color: "#173334",
+        },
+      }}
+    >
+      Register Here
+    </Button>
+  </Link>
+</Grid>
               </Grid>
             </form>
 
-            {/* <Divider sx={{ width: "100%", margin: "1rem 0" }} /> */}
-
-            {/* Register Section */}
-            <Grid
-              container
-              justifyContent="center"
-              display="flex"
-              sx={{ mt: "4rem" }}
-              alignItems="center"
-            >
-              <Typography variant="body2" sx={{ marginRight: "0.5rem" }}>
-                If you don't have an account
-              </Typography>
-              <Link to="/register">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{
-                    padding: "10px 20px",
-                    fontSize: "1rem",
-                    fontWeight: "500",
-                    backgroundColor: "#febd2f",
-                    borderRadius: "0px",
-                    color: "#173334",
-                    "&:hover": {
-                      backgroundColor: "#173334",
-                      color: "#febd2f",
-                    },
-                  }}
-                >
-                  Register <ArrowRightAltIcon sx={{ fontSize: "2rem" }} />
+            {/* Dialog for login errors */}
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+              <DialogTitle>{"Login Error"}</DialogTitle>
+              <DialogContent>
+                <p>{dialogMessage}</p>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleCloseDialog} color="primary">
+                  Close
                 </Button>
-              </Link>
-            </Grid>
+              </DialogActions>
+            </Dialog>
           </Box>
-
-          {/* Dialog for login errors */}
-          <Dialog open={openDialog} onClose={handleCloseDialog}>
-            <DialogTitle>{"Login Error"}</DialogTitle>
-            <DialogContent>
-              <p>{dialogMessage}</p>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleCloseDialog} color="primary">
-                Close
-              </Button>
-            </DialogActions>
-          </Dialog>
         </Grid>
       </Container>
-      <Box
-        sx={{ backgroundColor: "#173334", mt: 10, pb: 10, color: "#febd2f" }}
-      >
+      <Box sx={{ backgroundColor: "#173334", mt: 10, pb: 10, color: "#febd2f" }}>
         <Footer />
       </Box>
     </>
